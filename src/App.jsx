@@ -1,13 +1,10 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import SocialApp from "./components/SocialApp"
 
 function App() {
 
   return (
     <>
-      Social_Media_App
+      <SocialApp />
     </>
   )
 }
