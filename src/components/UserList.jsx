@@ -20,7 +20,7 @@ export default function UserList() {
             const response = await axios.get("https://dummyapi.io/data/v1/user", { headers: { "app-id": import.meta.env.VITE_APP_ID } });
             const json = await response.data;
             setUsers([...json.data]);
-            console.log(json.data);
+            // console.log(json.data);
         } catch (error) {
             console.log(error);
             throw error;

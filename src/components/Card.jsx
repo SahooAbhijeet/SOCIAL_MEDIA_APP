@@ -12,7 +12,7 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import { FavoriteBorderOutlined } from '@mui/icons-material';
 
 
-export default function UserCard({ picture, firstName, text }) {
+function UserCard({ picture, firstName, text }) {
     const [isLiked, setisLiked] = React.useState(false);
     return (
         <Card sx={{ maxWidth: 345 }}>
@@ -50,7 +50,7 @@ export default function UserCard({ picture, firstName, text }) {
         </Card>
     );
 }
-
+ export default React.memo(UserCard);
 
 // Why we are using POSTAMN instead of webBrowser?
 // Because browser only support get request whereas postman allows us to use differnt type of http request and in browser we cannot configure request-headers as app-id whereas postman allows us to do that.

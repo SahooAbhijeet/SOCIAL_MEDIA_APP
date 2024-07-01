@@ -1,12 +1,14 @@
 import { LoadingButton } from '@mui/lab';
 import { Box, Button, TextField } from '@mui/material'
 import axios from 'axios';
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
+import PostCardContext from '../providers/PostProvider';
 
 const TextInput = () => {
     const [userInput, setUserInput] = useState("");
-    const [userPost, setUserPost] = useState("");
+    const [imageUrl, setImageUrl] = useState("");
     const [loading, setLoading] = useState(false);
+    const {posts, setPosts} = useContext(PostCardContext);
 
     useEffect(() => {
         createUserPost();
@@ -18,7 +20,7 @@ const TextInput = () => {
             {
                 owner: "60d0fe4f5311236168a109d5",
                 text: userInput,
-                image: userPost,
+                image: imageUrl,
                 likes: 0,
                 publishDate: new Date()
             },
@@ -32,8 +34,8 @@ const TextInput = () => {
         console.log(json);
         setLoading(false);
         setUserInput("");
-        setUserPost("");
-
+        setImageUrl("");
+        setPosts([response.data,...posts]);
     }
     return (
 
@@ -51,8 +53,8 @@ const TextInput = () => {
                 fullWidth
                 id='outlined-basic'
                 sx={{ mt: '1rem' }}
-                value={userPost}
-                onChange={(e) => setUserPost(e.target.value)}
+                value={imageUrl}
+                onChange={(e) => setImageUrl(e.target.value)}
                 label="Image for your post"
             />
             {
