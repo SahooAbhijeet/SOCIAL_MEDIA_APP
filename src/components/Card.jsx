@@ -9,39 +9,48 @@ import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import { red } from '@mui/material/colors';
 import FavoriteIcon from '@mui/icons-material/Favorite';
+import { FavoriteBorderOutlined } from '@mui/icons-material';
 
 
-export default function UserCard() {
+export default function UserCard({ picture, firstName, text }) {
+    const [isLiked, setisLiked] = React.useState(false);
     return (
         <Card sx={{ maxWidth: 345 }}>
             <CardHeader
                 avatar={
                     <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
-                        R
+                        {firstName.substring(0, 1)}
                     </Avatar>
                 }
 
-                title="Shrimp and Chorizo Paella"
+                title={firstName}
                 subheader="September 14, 2016"
             />
-            <CardMedia
-                component="img"
-                height="194"
-                image="https://img.freepik.com/free-photo/top-view-pepperoni-pizza-with-mushroom-sausages-bell-pepper-olive-corn-black-wooden_141793-2158.jpg?size=626&ext=jpg&ga=GA1.1.672527374.1716401774&semt=ais_user"
-                alt="Paella dish"
-            />
+            {(picture.length > 0) ?
+                (<CardMedia
+                    component="img"
+                    height="194"
+                    image={picture}
+                    alt="Paella dish"
+                />) : null
+            }
+
             <CardContent>
                 <Typography variant="body2" color="text.secondary">
-                    This impressive paella is a perfect party dish and a fun meal to cook
-                    together with your guests. Add 1 cup of frozen peas along with the mussels,
-                    if you like.
+                    {text}
                 </Typography>
             </CardContent>
             <CardActions disableSpacing>
-                <IconButton aria-label="add to favorites">
-                    <FavoriteIcon />
+                <IconButton aria-label="add to favorites" onClick={() => setisLiked(!isLiked)}>
+                    {
+                        (isLiked) ? <FavoriteIcon sx={{ color: red[500] }} /> : <FavoriteBorderOutlined />
+                    }
                 </IconButton>
             </CardActions>
         </Card>
     );
 }
+
+
+// Why we are using POSTAMN instead of webBrowser?
+// Because browser only support get request whereas postman allows us to use differnt type of http request and in browser we cannot configure request-headers as app-id whereas postman allows us to do that.
