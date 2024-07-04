@@ -1,32 +1,14 @@
-import React, { useEffect, useState } from 'react'
 import MainContainer from './MainContainer'
-import Navbar from './Navbar'
 import TextInput from './TextInput'
 import PostCardContext from '../providers/PostProvider';
-import axios from 'axios';
+import useUserPost from '../hooks/useUserPost';
 const SocialApp = () => {
 
-  const [posts, setPosts] = useState([]);
-  console.log(posts)
-    useEffect(() => {
-        getUserPosts();
-    }, []);
+  const { posts, setPosts } = useUserPost();
 
-    async function getUserPosts() {
-        try {
-            const response = await axios.get("https://dummyapi.io/data/v1/post", { headers: { "app-id": import.meta.env.VITE_APP_ID } });
-            const json = await response.data;
-            setPosts([...json.data]);
-            console.log(import.meta.env.VITE_APP_ID)
-        } catch (error) {
-            console.log(error);
-            throw error;
-        }
-    }
   return (
     <div>
-      <PostCardContext.Provider value={ {posts, setPosts} }>
-        <Navbar />
+      <PostCardContext.Provider value={{ posts, setPosts }}>
         <TextInput />
         <MainContainer />
       </PostCardContext.Provider>
